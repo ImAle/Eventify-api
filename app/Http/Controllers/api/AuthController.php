@@ -45,4 +45,29 @@ class AuthController extends BaseController
 
         return $this->sendResponse($user, "User created successfully");
     }
+
+    public function login(Request $request) {
+
+        // Validamos el correo y contraseña
+        $request -> validate([
+            "email" => "required|email",
+            "password" => "required"
+        ]);
+
+        // En caso de que las credenciales para login sean incorrectas saltara el error
+        if(!Auth::attemp($request -> only("email", "password"))) {
+            return response() -> json(["message" => "Credenciales incorrectas"], 401);
+        }
+
+        // Crea el token del usuario
+        $user = Auth::user();
+        $token = $user->createToken("auth_token")->plainTextToken;
+
+        // Devuelve la información del usuario y el token
+        return response()->json([
+            "message" => "Login correcto",
+            "token" => $token,
+            "user" => $user,
+        ]);
+    }
 }
