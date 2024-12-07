@@ -3,21 +3,16 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends BaseController
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::where('role', '!=', 'a')
-                 ->where('deleted', '!=', 1)
-                 ->get();
-        
-        return $this->sendResponse($users, 'Users retrieved successfully');
+        //
     }
 
     /**
@@ -41,13 +36,7 @@ class UserController extends BaseController
      */
     public function show(string $id)
     {
-        $user = User::find($id);
-
-        if (is_null($user)) {
-            return $this->sendError('User not found.');
-        }
-        
-        return $this->sendResponse($user, 'User retrieved successfully.');
+        //
     }
 
     /**
