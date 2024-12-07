@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\api\BaseController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -47,27 +48,16 @@ class AuthController extends BaseController
     }
 
     public function login(Request $request) {
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('Eventify')->plainTextToken;
+            $success['name'] =  $user->name;
 
-        // Validamos el correo y contraseña
-        $request -> validate([
-            "email" => "required|email",
-            "password" => "required"
-        ]);
-
-        // En caso de que las credenciales para login sean incorrectas saltara el error
-        if(!Auth::attemp($request -> only("email", "password"))) {
-            return response() -> json(["message" => "Credenciales incorrectas"], 401);
+            return $this->sendResponse($success, 'User login successfully.');
         }
-
-        // Crea el token del usuario
-        $user = Auth::user();
-        $token = $user->createToken("auth_token")->plainTextToken;
-
-        // Devuelve la información del usuario y el token
-        return response()->json([
-            "message" => "Login correcto",
-            "token" => $token,
-            "user" => $user,
-        ]);
+        else{
+            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised'], 500);
+        }
     }
+
 }
