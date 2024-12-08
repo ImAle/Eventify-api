@@ -10,7 +10,7 @@
     </div>
     @endif
 
-    <!-- Botón de Crear Nuevo Evento -->
+    <!-- Botón de crear nuevo evento -->
     @if (Auth::check() && Auth::user()->role === 'o')
     <div class="text-center mt-4">
         <a href="{{ route('events.store') }}" class="btn btn-success">Crear Nuevo Evento</a>
@@ -22,8 +22,6 @@
     <a href="{{ route('events.generateInforme') }}" class="btn btn-secondary">Generar Informe</a>
     </div>
     @endif
-    
-
 
     <!-- Contenedor centrado solo para el mensaje y los eventos -->
     <div class="container mt-5" style="min-height: 50vh;">
@@ -57,7 +55,7 @@
                     </div>
                 </div>
 
-                <!-- Botones fuera de la tarjeta, centrados -->
+                <!-- Botones fuera de la tarjeta y centrados -->
                 <div class="d-flex flex-column align-items-center justify-content-center ms-2">
                     @if (Auth::check() && Auth::user()->role === 'u')
                         @if ($registered === true)

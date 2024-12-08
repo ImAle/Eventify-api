@@ -5,6 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventsController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\informeController;
+use App\Http\Controllers\EventListController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,9 @@ use App\Http\Controllers\informeController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Ruta para mostrar la vista de la tabla de eventos
+Route::get('/events', [EventListController::class, 'index'])->name('events.index');
 
 Auth::routes(['verify' => true]);
 
