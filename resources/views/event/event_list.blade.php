@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css">
 </head>
 <body class="bg-gray-100">
-    <!-- Header -->
     <header class="bg-white shadow-md py-4">
         <div class="container mx-auto flex justify-between items-center px-6">
             <a href="/" class="text-2xl font-bold text-gray-700">Eventify</a>
@@ -28,11 +27,11 @@
         </div>
     </header>
 
-    <main class="container mx-auto mt-10">
+    <div class="container mx-auto mt-10">
         <h1 class="text-3xl font-semibold text-gray-700 text-center mb-6">Lista de Eventos</h1>
         <!-- Tabla para mostrar los eventos -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full table-auto">
+            <table class="min-w-full table-auto table-responsive">
                 <thead class="bg-gray-800 text-white">
                     <tr>
                         <th class="px-4 py-2">Organizador</th>
@@ -67,6 +66,6 @@
                 </tbody>
             </table>
         </div>
-    </main>
+    </div>
 </body>
 </html>
